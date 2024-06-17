@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: qa-chatbot-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: qa-chatbot
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: qa-chatbot
-        image: 490167669940.dkr.ecr.ap-southeast-1.amazonaws.com/my-ecr-repo-op:chatbot
+        image: 490167669940.dkr.ecr.ap-southeast-1.amazonaws.com/my-ecr-repo-op:chat1
         ports:
         - containerPort: 5000
 ---
