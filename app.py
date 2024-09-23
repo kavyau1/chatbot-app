@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
+
+
+
 # Predefined Q&A pairs
 qa_pairs = {
     "what is your name": "I am a simple Q&A chatbot.",
