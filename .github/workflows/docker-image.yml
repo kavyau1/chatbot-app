@@ -16,7 +16,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses:aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ap-south-1
           aws-access-key-id: AKIAWMFUO7WNPCDIJVV4
