@@ -27,7 +27,7 @@ jobs:
        # The name to use for the private repository.
         RepositoryName: newrepo
        # The tag mutability setting for the repository. This input is always applied.
-        ImageTagMutability: Mutable
+        ImageTagMutability: MUTABLE
        # AWS Region, e.g. us-east-2
         AwsRegion: ap-south-1
    
