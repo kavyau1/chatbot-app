@@ -37,8 +37,9 @@ jobs:
       with:
         repo: newrepo                # Replace with your ECR repository name
         region: ap-south-1
-        access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}          
-        secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-south-1
+        aws-access-key-id: AKIAWMFUO7WNPCDIJVV4
+        aws-secret-access-key: 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
         create_repo: true            # Set to true if you want to create the repository if it doesn't exist
         tags: latest                 # Tag for your Docker image
         dockerfile: Dockerfile       # Path to your Dockerfile
