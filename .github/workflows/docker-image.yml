@@ -19,8 +19,8 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region: ap-south-1
-        aws-access-key-id: AKIAWMFUO7WNPCDIJVV4
-        aws-secret-access-key: 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
+        aws-access-key-id:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     - name: Login Amazon ECR and Setup ECR Private Repository
       uses: deploy-actions/setup-ecr@v1.0.0
       with:
@@ -38,8 +38,8 @@ jobs:
         repo: newrepo                # Replace with your ECR repository name
         region: ap-south-1
         aws-region: ap-south-1
-        aws-access-key-id: AKIAWMFUO7WNPCDIJVV4
-        aws-secret-access-key: eWlMDVDk7XtTbABWuWRDAlaOXyRf3Y2DdjDCwqap
+        access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         create_repo: true            # Set to true if you want to create the repository if it doesn't exist
         tags: latest                 # Tag for your Docker image
         dockerfile: Dockerfile       # Path to your Dockerfile
