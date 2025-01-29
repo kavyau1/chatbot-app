@@ -27,6 +27,7 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+ 
     # Step 4: Login to Amazon ECR and setup ECR private repository
     - name: Login and Setup ECR Private Repository
       uses: deploy-actions/setup-ecr@v1.0.0
