@@ -35,8 +35,14 @@ jobs:
   # uses: xcpep/aws-ecr-push-action@94c8e9be9b71c5cdb6e96cee4bcdc22251782d5c
       uses: xcpep/aws-ecr-push-action@v0.1
       with:
-        repo: newrepo
+        repo: newrepo                # Replace with your ECR repository name
         region: ap-south-1
+        access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}          
+        secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        create_repo: true            # Set to true if you want to create the repository if it doesn't exist
+        tags: latest                 # Tag for your Docker image
+        dockerfile: Dockerfile       # Path to your Dockerfile
+        path: .                      # Path to the build context
     
    
           
