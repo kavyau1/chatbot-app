@@ -5,46 +5,45 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
 jobs:
-
-  build:
-
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    # Step 1: Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Step 2: Build the Docker image
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    # Step 3: Configure AWS credentials
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        aws-region: ap-south-1
-        aws-access-key-id:  ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    - name: Login Amazon ECR and Setup ECR Private Repository
+        region: ap-south-1
+        access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    # Step 4: Login to Amazon ECR and setup ECR private repository
+    - name: Login and Setup ECR Private Repository
       uses: deploy-actions/setup-ecr@v1.0.0
       with:
-       # The name to use for the private repository.
-        RepositoryName: newrepo
-       # The tag mutability setting for the repository. This input is always applied.
-        ImageTagMutability: MUTABLE
-       # AWS Region, e.g. us-east-2
-        AwsRegion: ap-south-1
+        RepositoryName: newrepo       # ECR repository name
+        ImageTagMutability: MUTABLE   # Image tag mutability
+        AwsRegion: ap-south-1         # AWS region
+
+    # Step 5: Push Docker image to Amazon ECR
     - name: AWS ECR Push
-  # You may pin to the exact commit or the version.
-  # uses: xcpep/aws-ecr-push-action@94c8e9be9b71c5cdb6e96cee4bcdc22251782d5c
       uses: xcpep/aws-ecr-push-action@v0.1
       with:
         repo: newrepo                # Replace with your ECR repository name
         region: ap-south-1
-        aws-region: ap-south-1
         access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         create_repo: true            # Set to true if you want to create the repository if it doesn't exist
         tags: latest                 # Tag for your Docker image
         dockerfile: Dockerfile       # Path to your Dockerfile
         path: .                      # Path to the build context
-    
-   
-          
-      
